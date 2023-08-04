@@ -6,6 +6,7 @@ import { TaskType, TaskState } from '../../common/enum/Task';
 import { PROXY_MODE_CACHED_PACKAGE_DIR_NAME } from '../../common/constants';
 import dayjs from '../../common/dayjs';
 import { HookEvent } from './HookEvent';
+import { DIST_NAMES } from './Package';
 
 export const HOST_NAME = os.hostname();
 export const PID = process.pid;
@@ -45,7 +46,7 @@ export type SyncPackageTaskOptions = {
 export type UpdateProxyCacheTaskOptions = {
   fullname: string,
   version?: string,
-  fileType: string,
+  fileType: DIST_NAMES,
   filePath: string
 };
 
@@ -71,7 +72,7 @@ export interface CreateSyncPackageTaskData extends TaskBaseData {
 export interface CreateUpdateProxyCacheTaskData extends TaskBaseData {
   fullname: string,
   version?: string,
-  fileType: string,
+  fileType: DIST_NAMES,
   filePath: string
 }
 
