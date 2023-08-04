@@ -150,6 +150,11 @@ export type _CnpmcoreConfig = {
    * in most cases, you should set to false to keep the same behavior as source registry.
    */
   strictSyncSpecivicVersion: boolean,
+
+  /**
+   * strictly enforces/validates manifest and tgz when publish, https://github.com/cnpm/cnpmcore/issues/542
+   */
+  strictValidateTarballPkg?: boolean,
 };
 
 // `redirectNotFound` must be false when syncMode is `proxy`.

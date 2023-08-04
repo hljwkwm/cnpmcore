@@ -1,7 +1,9 @@
 import { PackageJson, Simplify } from 'type-fest';
+import { isEqual } from 'lodash';
 import {
   UnprocessableEntityError,
   ForbiddenError,
+  ConflictError,
 } from 'egg-errors';
 import {
   HTTPController,
@@ -17,7 +19,7 @@ import * as ssri from 'ssri';
 import validateNpmPackageName from 'validate-npm-package-name';
 import { Static, Type } from '@sinclair/typebox';
 import { AbstractController } from '../AbstractController';
-import { getScopeAndName, FULLNAME_REG_STRING } from '../../../common/PackageUtil';
+import { getScopeAndName, FULLNAME_REG_STRING, extractPackageJSON } from '../../../common/PackageUtil';
 import { PackageManagerService } from '../../../core/service/PackageManagerService';
 import {
   VersionRule,
@@ -27,6 +29,9 @@ import {
 } from '../../typebox';
 import { RegistryManagerService } from '../../../core/service/RegistryManagerService';
 import { PackageJSONType } from '../../../repository/PackageRepository';
+import { CacheAdapter } from '../../../common/adapter/CacheAdapter';
+
+const STRICT_CHECK_TARBALL_FIELDS: (keyof PackageJson)[] = [ 'name', 'version', 'scripts', 'dependencies', 'devDependencies', 'peerDependencies', 'optionalDependencies', 'license', 'licenses', 'bin' ];
 
 type PackageVersion = Simplify<PackageJson.PackageJsonStandard & {
   name: 'string';
@@ -70,6 +75,9 @@ export class SavePackageVersionController extends AbstractController {
 
   @Inject()
   private readonly registryManagerService: RegistryManagerService;
+
+  @Inject()
+  private readonly cacheAdapter: CacheAdapter;
 
   // https://github.com/cnpm/cnpmjs.org/blob/master/docs/registry-api.md#publish-a-new-package
   // https://github.com/npm/libnpmpublish/blob/main/publish.js#L43
@@ -171,6 +179,19 @@ export class SavePackageVersionController extends AbstractController {
       }
     }
 
+    // https://github.com/cnpm/cnpmcore/issues/542
+    // check tgz & manifests
+    if (this.config.cnpmcore.strictValidateTarballPkg) {
+      const tarballPkg = await extractPackageJSON(tarballBytes);
+      const versionManifest = pkg.versions[tarballPkg.version];
+      const diffKeys = STRICT_CHECK_TARBALL_FIELDS.filter(key => {
+        return !isEqual(tarballPkg[key], versionManifest[key]);
+      });
+      if (diffKeys.length > 0) {
+        throw new UnprocessableEntityError(`${diffKeys} mismatch between tarball and manifest`);
+      }
+    }
+
     const [ scope, name ] = getScopeAndName(fullname);
 
     // make sure readme is string
@@ -183,20 +204,30 @@ export class SavePackageVersionController extends AbstractController {
     }
 
     const registry = await this.registryManagerService.ensureSelfRegistry();
-    const packageVersionEntity = await this.packageManagerService.publish({
-      scope,
-      name,
-      version: packageVersion.version,
-      description: packageVersion.description,
-      packageJson: packageVersion as PackageJSONType,
-      readme,
-      dist: {
-        content: tarballBytes,
-      },
-      tag: tagWithVersion.tag,
-      registryId: registry.registryId,
-      isPrivate: true,
-    }, user);
+
+    let packageVersionEntity;
+    const lockRes = await this.cacheAdapter.usingLock(`${pkg.name}:publish`, 60, async () => {
+      packageVersionEntity = await this.packageManagerService.publish({
+        scope,
+        name,
+        version: packageVersion.version,
+        description: packageVersion.description as string,
+        packageJson: packageVersion as PackageJSONType,
+        readme,
+        dist: {
+          content: tarballBytes,
+        },
+        tag: tagWithVersion.tag,
+        registryId: registry.registryId,
+        isPrivate: true,
+      }, user);
+    });
+
+    // lock fail
+    if (!lockRes) {
+      this.logger.warn('[package:version:add] check lock fail');
+      throw new ConflictError('Unable to create the publication lock, please try again later.');
+    }
 
     this.logger.info('[package:version:add] %s@%s, packageVersionId: %s, tag: %s, userId: %s',
       packageVersion.name, packageVersion.version, packageVersionEntity.packageVersionId,

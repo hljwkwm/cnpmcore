@@ -1,4 +1,5 @@
 import assert from 'assert';
+import { setTimeout } from 'node:timers/promises';
 import { app, mock } from 'egg-mock/bootstrap';
 import { TestUtil } from '../../../../test/TestUtil';
 import { UserRepository } from '../../../../app/repository/UserRepository';
@@ -11,6 +12,7 @@ import { Token as TokenModel } from '../../../../app/repository/model/Token';
 import { User } from '../../../../app/core/entity/User';
 import dayjs from 'dayjs';
 import { PackageManagerService } from '../../../../app/core/service/PackageManagerService';
+import { ForbiddenError } from 'egg-errors';
 
 describe('test/port/controller/package/SavePackageVersionController.test.ts', () => {
   let userRepository: UserRepository;
@@ -21,7 +23,7 @@ describe('test/port/controller/package/SavePackageVersionController.test.ts', ()
   });
 
   describe('[PUT /:fullname] save()', () => {
-    it('should set registry filed after publish', async () => {
+    it('should set registry field after publish', async () => {
       mock(app.config.cnpmcore, 'allowPublishNonScopePackage', true);
       const { pkg, user } = await TestUtil.createPackage({ name: 'non_scope_pkg', version: '1.0.0' });
       const pkg2 = await TestUtil.getFullPackage({ name: pkg.name, version: '2.0.0' });
@@ -85,6 +87,80 @@ describe('test/port/controller/package/SavePackageVersionController.test.ts', ()
 
       assert(pkgEntity);
       assert.equal(pkgEntity.registryId, selfRegistry.registryId);
+    });
+
+    it('should 409 when lock failed', async () => {
+      const { pkg, user } = await TestUtil.createPackage({ name: '@cnpm/banana', version: '1.0.0' });
+
+      const packageManagerService = await app.getEggObject(PackageManagerService);
+
+      mock(packageManagerService, 'publish', async () => {
+        await setTimeout(50);
+        throw new ForbiddenError('mock error');
+      });
+
+      const [ errorRes, conflictRes ] = await Promise.all([
+        app.httpRequest()
+          .put(`/${pkg.name}`)
+          .set('authorization', user.authorization)
+          .set('user-agent', user.ua)
+          .send(pkg),
+        (async () => {
+          await setTimeout(10);
+          return app.httpRequest()
+            .put(`/${pkg.name}`)
+            .set('authorization', user.authorization)
+            .set('user-agent', user.ua)
+            .send(pkg);
+        })(),
+      ]);
+      assert(errorRes.error, '[FORBIDDEN] mock error');
+      assert.equal(conflictRes.status, 409);
+      assert(conflictRes.error, '[CONFLICT] Unable to create the publication lock, please try again later.');
+
+      // release lock
+      await setTimeout(50);
+      const nextErrorRes = await app.httpRequest()
+        .put(`/${pkg.name}`)
+        .set('authorization', user.authorization)
+        .set('user-agent', user.ua)
+        .send(pkg);
+      assert(nextErrorRes.error, '[FORBIDDEN] mock error');
+
+    });
+
+    it('should verify tgz and manifest', async () => {
+      const { pkg, user } = await TestUtil.createPackage({ name: '@cnpm/banana', version: '1.0.0' });
+      const pkg2 = await TestUtil.getFullPackage({ name: pkg.name, version: '0.0.1' });
+
+      pkg2.versions['0.0.1'].name = '@cnpm/orange';
+
+      mock(app.config.cnpmcore, 'strictValidateTarballPkg', true);
+      const res = await app.httpRequest()
+        .put(`/${pkg2.name}`)
+        .set('authorization', user.authorization)
+        .set('user-agent', user.ua)
+        .send(pkg2)
+        .expect(422);
+
+      assert.equal(res.body.error, '[UNPROCESSABLE_ENTITY] name mismatch between tarball and manifest');
+    });
+    it('should verify tgz and manifest with multiple fields', async () => {
+      mock(app.config.cnpmcore, 'allowPublishNonScopePackage', true);
+      const { pkg, user } = await TestUtil.createPackage({ name: 'non_scope_pkg', version: '1.0.0' });
+      const pkg2 = await TestUtil.getFullPackage({ name: pkg.name, version: '0.0.1' });
+
+      pkg2.versions['0.0.1'].dependencies = { lodash: 'latest' };
+
+      mock(app.config.cnpmcore, 'strictValidateTarballPkg', true);
+      const res = await app.httpRequest()
+        .put(`/${pkg2.name}`)
+        .set('authorization', user.authorization)
+        .set('user-agent', user.ua)
+        .send(pkg2)
+        .expect(422);
+
+      assert.equal(res.body.error, '[UNPROCESSABLE_ENTITY] name,dependencies mismatch between tarball and manifest');
     });
 
     it('should add new version success on scoped package', async () => {

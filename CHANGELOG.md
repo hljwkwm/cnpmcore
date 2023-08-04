@@ -1,5 +1,82 @@
 # Changelog
 
+## [3.39.4](https://github.com/cnpm/cnpmcore/compare/v3.39.3...v3.39.4) (2023-08-04)
+
+
+### Bug Fixes
+
+* publisher info ([#565](https://github.com/cnpm/cnpmcore/issues/565)) ([94bcc1a](https://github.com/cnpm/cnpmcore/commit/94bcc1a37ec621a292937b21699ee007c2994974))
+
+## [3.39.3](https://github.com/cnpm/cnpmcore/compare/v3.39.2...v3.39.3) (2023-08-01)
+
+
+### Bug Fixes
+
+* don't log NotImplementedError to error log ([#563](https://github.com/cnpm/cnpmcore/issues/563)) ([bcf3547](https://github.com/cnpm/cnpmcore/commit/bcf3547ff2ee5830fc8cd61bd21b5629d73de316))
+
+## [3.39.2](https://github.com/cnpm/cnpmcore/compare/v3.39.1...v3.39.2) (2023-07-29)
+
+
+### Bug Fixes
+
+* rename libpg-query to libpg-query-node ([#561](https://github.com/cnpm/cnpmcore/issues/561)) ([9483a46](https://github.com/cnpm/cnpmcore/commit/9483a460a395e34c68cb9273ec2e52add4ed1962))
+
+## [3.39.1](https://github.com/cnpm/cnpmcore/compare/v3.39.0...v3.39.1) (2023-07-27)
+
+
+### Bug Fixes
+
+* body parser ignore ([#558](https://github.com/cnpm/cnpmcore/issues/558)) ([81d6455](https://github.com/cnpm/cnpmcore/commit/81d6455ff811b53618c622df74b1f04cf99af3e4))
+
+## [3.39.0](https://github.com/cnpm/cnpmcore/compare/v3.38.2...v3.39.0) (2023-07-27)
+
+
+### Features
+
+* Sync libpg-query binary ([#557](https://github.com/cnpm/cnpmcore/issues/557)) ([8556b5f](https://github.com/cnpm/cnpmcore/commit/8556b5f92f3a6525dd6dde2661a24de9137122d4))
+
+## [3.38.2](https://github.com/cnpm/cnpmcore/compare/v3.38.1...v3.38.2) (2023-07-21)
+
+
+### Bug Fixes
+
+* _npmUser info in fullManifest ([#554](https://github.com/cnpm/cnpmcore/issues/554)) ([4455295](https://github.com/cnpm/cnpmcore/commit/44552959eb8052ac534cc60c1c2820962deed5b8)), closes [#553](https://github.com/cnpm/cnpmcore/issues/553)
+
+## [3.38.1](https://github.com/cnpm/cnpmcore/compare/v3.38.0...v3.38.1) (2023-07-21)
+
+
+### Bug Fixes
+
+* publish lock ([#555](https://github.com/cnpm/cnpmcore/issues/555)) ([ec90ab8](https://github.com/cnpm/cnpmcore/commit/ec90ab85fa529a9666f7f3f03e54d063ddeebc0b))
+
+## [3.38.0](https://github.com/cnpm/cnpmcore/compare/v3.37.1...v3.38.0) (2023-07-17)
+
+
+### Features
+
+* misc router ([#552](https://github.com/cnpm/cnpmcore/issues/552)) ([e9e3a7b](https://github.com/cnpm/cnpmcore/commit/e9e3a7b70f78a13dd7ded2795c62f4d6fcbbe431)), closes [#551](https://github.com/cnpm/cnpmcore/issues/551)
+
+## [3.37.1](https://github.com/cnpm/cnpmcore/compare/v3.37.0...v3.37.1) (2023-07-13)
+
+
+### Bug Fixes
+
+* playwright bianry sync config ([#548](https://github.com/cnpm/cnpmcore/issues/548)) ([166e334](https://github.com/cnpm/cnpmcore/commit/166e3341f424fe514fd7c8c62d0530ac51ef6c12))
+
+## [3.37.0](https://github.com/cnpm/cnpmcore/compare/v3.36.0...v3.37.0) (2023-07-12)
+
+
+### Features
+
+* add lastUsedAt for classic token ([#547](https://github.com/cnpm/cnpmcore/issues/547)) ([e061685](https://github.com/cnpm/cnpmcore/commit/e0616859ffd64f1f273b1dfff711f0d1796b9ec4))
+
+## [3.36.0](https://github.com/cnpm/cnpmcore/compare/v3.35.1...v3.36.0) (2023-07-09)
+
+
+### Features
+
+* support strictValidateTarballPkg ([#546](https://github.com/cnpm/cnpmcore/issues/546)) ([dd3438f](https://github.com/cnpm/cnpmcore/commit/dd3438f470a87ee4f7be058345bbaaa914ea8b2e)), closes [#542](https://github.com/cnpm/cnpmcore/issues/542)
+
 ## [3.35.1](https://github.com/cnpm/cnpmcore/compare/v3.35.0...v3.35.1) (2023-06-29)
 
 
