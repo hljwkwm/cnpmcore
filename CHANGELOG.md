@@ -1,5 +1,54 @@
 # Changelog
 
+## [3.43.3](https://github.com/cnpm/cnpmcore/compare/v3.43.2...v3.43.3) (2023-09-01)
+
+
+### Bug Fixes
+
+* author display in cli ([#582](https://github.com/cnpm/cnpmcore/issues/582)) ([9b2dc41](https://github.com/cnpm/cnpmcore/commit/9b2dc4113485402d5475410e7e8fcd393a562054))
+
+## [3.43.2](https://github.com/cnpm/cnpmcore/compare/v3.43.1...v3.43.2) (2023-09-01)
+
+
+### Bug Fixes
+
+* author info ([#581](https://github.com/cnpm/cnpmcore/issues/581)) ([6dd241d](https://github.com/cnpm/cnpmcore/commit/6dd241d6900bfcebab17aa7814f3c750994a337e))
+
+## [3.43.1](https://github.com/cnpm/cnpmcore/compare/v3.43.0...v3.43.1) (2023-09-01)
+
+
+### Bug Fixes
+
+* use env.CNPMCORE_CONFIG_ENABLE_ES to enable ([#580](https://github.com/cnpm/cnpmcore/issues/580)) ([bcf67c4](https://github.com/cnpm/cnpmcore/commit/bcf67c4cea675793c4804d1892c4a12a2e25c0b8))
+
+## [3.43.0](https://github.com/cnpm/cnpmcore/compare/v3.42.2...v3.43.0) (2023-09-01)
+
+
+### Features
+
+* support npm search command like npmio ([#513](https://github.com/cnpm/cnpmcore/issues/513)) ([7f85848](https://github.com/cnpm/cnpmcore/commit/7f858482f7c26457a37d4e99fb84bd4b9f0ca5da))
+
+## [3.42.2](https://github.com/cnpm/cnpmcore/compare/v3.42.1...v3.42.2) (2023-08-31)
+
+
+### Bug Fixes
+
+* should use NodeNext on module and moduleResolution tsconfig ([#578](https://github.com/cnpm/cnpmcore/issues/578)) ([10d7a84](https://github.com/cnpm/cnpmcore/commit/10d7a8499e5f53663f087e132642018c77783948))
+
+## [3.42.1](https://github.com/cnpm/cnpmcore/compare/v3.42.0...v3.42.1) (2023-08-23)
+
+
+### Bug Fixes
+
+* default latest tag ([#575](https://github.com/cnpm/cnpmcore/issues/575)) ([ffe8fa7](https://github.com/cnpm/cnpmcore/commit/ffe8fa7d190550d9ca340fe62b31397ff018f5d2)), closes [#574](https://github.com/cnpm/cnpmcore/issues/574)
+
+## [3.42.0](https://github.com/cnpm/cnpmcore/compare/v3.41.0...v3.42.0) (2023-08-22)
+
+
+### Features
+
+* revalidate latest version ([#573](https://github.com/cnpm/cnpmcore/issues/573)) ([73b4383](https://github.com/cnpm/cnpmcore/commit/73b4383f5c0805c65abed9c5ac50758402321a53)), closes [#376](https://github.com/cnpm/cnpmcore/issues/376)
+
 ## [3.41.0](https://github.com/cnpm/cnpmcore/compare/v3.40.0...v3.41.0) (2023-08-17)
 
 
