@@ -1,5 +1,48 @@
 # Changelog
 
+## [3.46.0](https://github.com/cnpm/cnpmcore/compare/v3.45.1...v3.46.0) (2023-10-11)
+
+
+### Features
+
+* read remote auth token from database ([#595](https://github.com/cnpm/cnpmcore/issues/595)) ([707a1d3](https://github.com/cnpm/cnpmcore/commit/707a1d3809f14cc9a7d613a16f8bea4e5baa7127))
+
+## [3.45.1](https://github.com/cnpm/cnpmcore/compare/v3.45.0...v3.45.1) (2023-10-07)
+
+
+### Bug Fixes
+
+* use oss-cnpm@5.0.1 ([#597](https://github.com/cnpm/cnpmcore/issues/597)) ([413ec56](https://github.com/cnpm/cnpmcore/commit/413ec5685ee54dd90fcfcd5cb59a9b732ec73d84))
+
+## [3.44.0](https://github.com/cnpm/cnpmcore/compare/v3.43.5...v3.44.0) (2023-10-07)
+
+
+### Features
+
+* sync all crhome for test binaries ([#592](https://github.com/cnpm/cnpmcore/issues/592)) ([4596b21](https://github.com/cnpm/cnpmcore/commit/4596b2127119f7c3c31f5fbe786504a7972d62a9))
+* use oss-client v2 ([#596](https://github.com/cnpm/cnpmcore/issues/596)) ([d24e3bd](https://github.com/cnpm/cnpmcore/commit/d24e3bd235fb73b1c145ff3b06dcc168d65b0f9f))
+
+## [3.44.0](https://github.com/cnpm/cnpmcore/compare/v3.43.5...v3.44.0) (2023-09-19)
+
+
+### Features
+
+* sync all crhome for test binaries ([#592](https://github.com/cnpm/cnpmcore/issues/592)) ([4596b21](https://github.com/cnpm/cnpmcore/commit/4596b2127119f7c3c31f5fbe786504a7972d62a9))
+
+## [3.43.5](https://github.com/cnpm/cnpmcore/compare/v3.43.4...v3.43.5) (2023-09-05)
+
+
+### Bug Fixes
+
+* the license may be an object ([#587](https://github.com/cnpm/cnpmcore/issues/587)) ([88b6afb](https://github.com/cnpm/cnpmcore/commit/88b6afb66e77c825d24189f904c448a9cbb86fab)), closes [/github.com/cnpm/cnpmcore/issues/585#issuecomment-1706009496](https://github.com/cnpm//github.com/cnpm/cnpmcore/issues/585/issues/issuecomment-1706009496)
+
+## [3.43.4](https://github.com/cnpm/cnpmcore/compare/v3.43.3...v3.43.4) (2023-09-02)
+
+
+### Bug Fixes
+
+* add CDN cache header on search api ([#583](https://github.com/cnpm/cnpmcore/issues/583)) ([89f6b98](https://github.com/cnpm/cnpmcore/commit/89f6b989c18e714ddd8a1c81fc96778ac53214d7))
+
 ## [3.43.3](https://github.com/cnpm/cnpmcore/compare/v3.43.2...v3.43.3) (2023-09-01)
 
 
