@@ -1,5 +1,40 @@
 # Changelog
 
+## [3.48.4](https://github.com/cnpm/cnpmcore/compare/v3.48.3...v3.48.4) (2023-11-28)
+
+
+### Bug Fixes
+
+* incorrect latest tag in strict specific version ([#610](https://github.com/cnpm/cnpmcore/issues/610)) ([acfd667](https://github.com/cnpm/cnpmcore/commit/acfd66748fee84f5a1fdf40755a96323cf4f15ef))
+
+## [3.48.3](https://github.com/cnpm/cnpmcore/compare/v3.48.2...v3.48.3) (2023-11-06)
+
+
+### Bug Fixes
+
+* es query script score syntax fix and add error handler for 404 error ([#607](https://github.com/cnpm/cnpmcore/issues/607)) ([8e1f4ca](https://github.com/cnpm/cnpmcore/commit/8e1f4ca880c6ad09f766807e6a751b5ae960b550))
+
+## [3.48.2](https://github.com/cnpm/cnpmcore/compare/v3.48.1...v3.48.2) (2023-11-03)
+
+
+### Bug Fixes
+
+* should set OPTIONS on access-control-allow-methods ([#608](https://github.com/cnpm/cnpmcore/issues/608)) ([0179ef3](https://github.com/cnpm/cnpmcore/commit/0179ef364a5bc6aac5eafafee7136bf61405ee43))
+
+## [3.48.1](https://github.com/cnpm/cnpmcore/compare/v3.48.0...v3.48.1) (2023-11-03)
+
+
+### Bug Fixes
+
+* should set access-control-allow-origin and headers ([#606](https://github.com/cnpm/cnpmcore/issues/606)) ([18ef7f4](https://github.com/cnpm/cnpmcore/commit/18ef7f49affd2656cdba26fe21078f46ca1e0cc5))
+
+## [3.48.0](https://github.com/cnpm/cnpmcore/compare/v3.47.2...v3.48.0) (2023-11-03)
+
+
+### Features
+
+* allow OPTIONS request on tgz downlaod url ([#605](https://github.com/cnpm/cnpmcore/issues/605)) ([5bedb25](https://github.com/cnpm/cnpmcore/commit/5bedb25f9dd29d684add0e1f4b827db0c8e0e818))
+
 ## [3.47.2](https://github.com/cnpm/cnpmcore/compare/v3.47.1...v3.47.2) (2023-10-28)
 
 
