@@ -1,5 +1,27 @@
 # Changelog
 
+## [3.49.2](https://github.com/cnpm/cnpmcore/compare/v3.49.1...v3.49.2) (2023-12-19)
+
+
+### Bug Fixes
+
+* ignore db query error default logger ([#626](https://github.com/cnpm/cnpmcore/issues/626)) ([6cc2f2d](https://github.com/cnpm/cnpmcore/commit/6cc2f2d8304d34ef4d195e8486a3d23456376cc5))
+* should search default packages when text is empty ([#623](https://github.com/cnpm/cnpmcore/issues/623)) ([0c4a52d](https://github.com/cnpm/cnpmcore/commit/0c4a52d220e7206a767423be9deec249c58458b2))
+
+## [3.49.2](https://github.com/cnpm/cnpmcore/compare/v3.49.1...v3.49.2) (2023-12-18)
+
+
+### Bug Fixes
+
+* should search default packages when text is empty ([#623](https://github.com/cnpm/cnpmcore/issues/623)) ([0c4a52d](https://github.com/cnpm/cnpmcore/commit/0c4a52d220e7206a767423be9deec249c58458b2))
+
+## [3.49.1](https://github.com/cnpm/cnpmcore/compare/v3.49.0...v3.49.1) (2023-12-18)
+
+
+### Bug Fixes
+
+* use tar fork version to fix memory leak ([#625](https://github.com/cnpm/cnpmcore/issues/625)) ([6c519f7](https://github.com/cnpm/cnpmcore/commit/6c519f73ce453b40bd2f7c9b2bd92fd0a1f6836b))
+
 ## [3.49.0](https://github.com/cnpm/cnpmcore/compare/v3.48.4...v3.49.0) (2023-12-12)
 
 
